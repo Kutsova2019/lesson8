@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>hw09</title>
+</head>
+<body>
+	<script>
+		var notification = [
+			{
+				date: '25/08/2009',
+				message: 'привiт'
+			},
+			{
+				date: '12/08/2000',
+				message: 'привет'
+			},
+			{
+				date: '11/08/2011',
+				message: 'hello'
+			},
+			{
+				date: '23/07/2019',
+				message: 'salut'
+			},
+		];
+
+		
+		function sortNotification(notification) {
+        function sortDate(arrDate) {
+            arrDate.sort(function(a, b) {
+                a = a.date.split("/").reverse().join("");
+                b = b.date.split("/").reverse().join("");
+                if (b < a) {
+                    return 1;
+                }
+                if (b > a) {
+                    return -1;
+                }
+            });
+        }
+        sortDate(notification);
+        return notification.reduce(function(accum, item) {
+            if (!accum.length || accum[accum.length - 1].title !== item.date) {
+                var arr = [];
+                arr.push(item.message);
+                var obj = {
+                    title: item.date,
+                    items: arr
+                };
+                accum.push(obj);
+            } else {
+                accum[accum.length - 1].items.push(item.message);
+            }
+            return accum;
+        }, []);
+    }
+    var sorted = sortNotification(notification);
+    console.log(sorted);
+
+	</script>
+
+</body>
+</html>
